@@ -81,12 +81,12 @@ docker run -d \
   --name panwatch \
   --restart unless-stopped \
   -e TZ=Asia/Shanghai \
-  -p 8000:8000 \
+  -p 8001:8001 \
   -v panwatch_data:/app/data \
   sunxiao0721/panwatch:latest
 ```
 
-Open `http://localhost:8000` and create your login credentials.
+Open `http://localhost:8001` and create your login credentials.
 
 Set `TZ` explicitly for background schedules and notification quiet hours, for example
 `-e TZ=UTC` or `-e TZ=America/New_York`. The image defaults to `Asia/Shanghai` and does
@@ -115,7 +115,7 @@ services:
     environment:
       TZ: "Asia/Shanghai"
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       - panwatch_data:/app/data
     restart: unless-stopped
@@ -222,18 +222,18 @@ Select the brain icon beside a holding to start TradingAgents deep analysis. Fou
 
 ```bash
 # One-command development setup (recommended)
-make dev-api          # Backend with automatic venv/dependencies on :8000
+make dev-api          # Backend with automatic venv/dependencies on :8001
 make dev-web          # Frontend with automatic pnpm install on :5183
 
 # Or start each service manually
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python server.py                              # Backend on :8000
+python server.py                              # Backend on :8001
 
 cd frontend && pnpm install && pnpm dev       # Frontend on :5183
 ```
 
-The frontend development server runs at `http://localhost:5183` and proxies `/api` to `127.0.0.1:8000`.
+The frontend development server runs at `http://localhost:5183` and proxies `/api` to `127.0.0.1:8001`.
 
 
 [Frontend UI conventions and checks](frontend/UI_GUIDELINES.md)

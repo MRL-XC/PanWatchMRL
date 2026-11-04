@@ -80,9 +80,9 @@ def check_http_startup() -> None:
                     if process.poll() is not None:
                         break
                     try:
-                        with urllib.request.urlopen("http://127.0.0.1:8000/api/health", timeout=2) as response:
+                        with urllib.request.urlopen("http://127.0.0.1:8001/api/health", timeout=2) as response:
                             assert response.status == 200
-                        with urllib.request.urlopen("http://127.0.0.1:8000/", timeout=2) as response:
+                        with urllib.request.urlopen("http://127.0.0.1:8001/", timeout=2) as response:
                             assert b"<html" in response.read().lower()
                         print("PASS: production startup, health endpoint, and frontend", flush=True)
                         return

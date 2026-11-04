@@ -115,12 +115,12 @@ ENV DOCKER=1
 # 默认时区（可在 docker run 时用 -e TZ=... 覆盖）
 ENV TZ=Asia/Shanghai
 
-# 暴露端口（保持 8000 不变，避免影响存量用户升级）
-EXPOSE 8000
+# 暴露端口（保持 8000 不变，避免影响存量用户升级 ->PanWatchMRL为单用户，端口改为 8001）
+EXPOSE 8001
 
 # 健康检查（使用 Python）
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')" || exit 1
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8001/api/health')" || exit 1
 
 # 启动命令
 CMD ["python", "server.py"]
